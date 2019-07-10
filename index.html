@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>自定义滤镜主题</title>
+    <link href='./js/mapbox-gl.css' rel='stylesheet' />
+    <script src="./js/mapbox-gl.js" charset="utf-8"></script>
+    <style>
+        html,body { margin:0; padding:0;height:100%;width:100%;}
+        #map { height:100%;width:100%; }
+        canvas.mapboxgl-canvas {
+            filter: sepia(100%) hue-rotate(160deg) brightness(44%) contrast(163%) saturate(160%);
+
+        }
+    </style>
+</head>
+<body>
+<div id="map"></div>
+
+</body>
+</html>
+<script>
+    var map = new mapboxgl.Map({
+        container: 'map', // container id
+        // style: 'mapbox://styles/mapbox/streets-v10',
+        style: {
+            "version": 8,
+            "sources": {
+                "composite": {
+                    "type": "raster",
+                    "tiles": [
+                        // 'https://www.google.cn/maps/vt?lyrs=m@189&gl=cn&x={x}&y={y}&z={z}'
+                        // 'http://webst0{1-4}.is.autonavi.com/appmaptile?style=7&x={x}&y={y}&z={z}'
+                        'https://mt0.google.cn/vt/lyrs=s&hl=zh-CN&gl=cn&x={x}&y={y}&z={z}',
+                        // 'https://t3.tianditu.gov.cn/DataServer?T=ter_w&tk=071154ed5c7f0200895790eee2444978&X={x}&Y={y}&L={z}'
+                    ],
+                    "tileSize": 256
+                }
+            },
+            "layers": [{
+                "id": "simple-tiles",
+                "type": "raster",
+                "source": "composite",
+                // "minzoom": 0,
+                // "maxzoom": 22
+            }]
+        },
+        center: [108.98224466253319, 34.434510660703366], // starting position
+        bearing: 0, //旋转
+        pitch: 0, //倾斜
+        // pitchWithRotate:false,
+        dragRotate: false, // 禁止旋转
+        zoom: 11, // starting zoom
+        // maxBounds: [ // 限制缩放区域
+        //     [108.21126756605912, 34.10667736240424], // Southwest coordinates
+        //     [109.30742444044682, 34.65854796844181] // Northeast coordinates
+        // ]
+    });
+</script>
